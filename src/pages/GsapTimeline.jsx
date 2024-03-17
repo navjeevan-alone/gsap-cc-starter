@@ -1,6 +1,30 @@
-const GsapTimeline = () => {
-  // TODO: Implement the gsap timeline
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react"; 
 
+gsap.registerPlugin(useGSAP);
+
+const GsapTimeline = () => { 
+  const playPause = () => {
+    if (!timeline.paused()) {
+      timeline.pause(); 
+      console.log("pause");
+    } else {
+      timeline.play(); 
+      console.log("play");
+    }
+  };
+  // TODO: Implement the gsap timeline
+  const timeline = gsap.timeline({ repeat: -1, yoyo: true });
+  useGSAP(() => {
+    timeline.to("#yellow-box", { x: 250 });
+    timeline.to("#yellow-box", {
+      rotate: 360,
+      borderRadius: 100,
+      scale: 2,
+      duration: 1,
+    });
+    // timeline.to("#yellow-box", { backgroundColor: "#0ae448", duration: 1 });
+  }, []);
   return (
     <main>
       <h1>GsapTimeline</h1>
@@ -27,15 +51,14 @@ const GsapTimeline = () => {
         <a
           href="https://greensock.com/docs/v3/GSAP/gsap.timeline()"
           target="_blank"
-          rel="noreferrer noopener nofollow"
-        >
+          rel="noreferrer noopener nofollow">
           gsap.timeline()
         </a>{" "}
         method.
       </p>
 
       <div className="mt-20 space-y-10">
-        <button onClick={() => {}}>Play/Pause</button>
+        <button onClick={playPause}>Play/Pause</button>
 
         <div id="yellow-box" className="w-20 h-20 bg-yellow-500 rounded-lg" />
       </div>

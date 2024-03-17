@@ -1,6 +1,33 @@
+import { ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+gsap.registerPlugin(ScrollTrigger);
+
 const GsapScrollTrigger = () => {
   // TODO: Implement the gsap scroll trigger
-
+  const scrollRef = useRef();
+  useGSAP(() => {
+    const boxes = gsap.utils.toArray(scrollRef.current.children);
+    boxes.forEach((box, index) =>
+      gsap.to(box, {
+        x: 300 * (index + 2),
+        scale: (index + 1) * (index + 2),
+        borderRadius: 100,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: box,
+          start: "bottom bottom",
+          end: "top 20%",
+          scrub: true,
+        },
+      })
+    );
+  }, []);
+  gsap.to(".box", {
+    scrollTrigger: ".box", // start the animation when ".box" enters the viewport (once)
+    x: 500,
+  });
   return (
     <main>
       <h1>GsapScrollTrigger</h1>
@@ -22,8 +49,7 @@ const GsapScrollTrigger = () => {
         <a
           href="https://gsap.com/docs/v3/Plugins/ScrollTrigger/"
           target="_blank"
-          rel="noreferrer noopener nofollow"
-        >
+          rel="noreferrer noopener nofollow">
           gsap scroll trigger
         </a>{" "}
         method.
@@ -44,21 +70,20 @@ const GsapScrollTrigger = () => {
           stroke="blue"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+          strokeLinejoin="round">
           <path d="M12 19V5" />
           <path d="M5 12l7 7 7-7" />
         </svg>
       </div>
 
-      <div className="mt-20 w-full h-screen">
+      <div className="mt-20 w-full h-screen" ref={scrollRef}>
         <div
           id="scroll-pink"
           className="scroll-box w-20 h-20 rounded-lg bg-pink-500"
         />
         <div
           id="scroll-orange"
-          className="scroll-box w-20 h-20 rounded-lg bg-orange-500"
+          className="scroll-box w-20 h-20 rounded-lg bg-pink-500"
         />
       </div>
     </main>

@@ -1,6 +1,28 @@
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 const GsapStagger = () => {
   // TODO: Implement the gsap.stagger() method
+  useGSAP(() => {
+    gsap.to(".stagger-box", {
+      y: 200,
+      rotate: 180,
+      borderRadius: 50,
+      stagger: {
+        // wrap advanced options in an object
+        each: 0.1,
+        from: "center",
+        grid: "auto",
+        ease: "power1.in",
+        repeat: -1,
 
+        yoyo: true,
+      },
+
+      duration: 1,
+      yoyo: true,
+      repeat: -1,
+    });
+  }, []);
   return (
     <main>
       <h1>GsapStagger</h1>
@@ -23,8 +45,7 @@ const GsapStagger = () => {
         <a
           href="https://gsap.com/resources/getting-started/Staggers"
           target="_blank"
-          rel="noreferrer noopener nofollow"
-        >
+          rel="noreferrer noopener nofollow">
           Gsap Stagger
         </a>{" "}
         feature.
@@ -32,13 +53,13 @@ const GsapStagger = () => {
 
       <div className="mt-20">
         <div className="flex gap-5">
-          <div className="w-20 h-20 bg-indigo-200 rounded-lg stagger-box" />
-          <div className="w-20 h-20 bg-indigo-300 rounded-lg stagger-box" />
-          <div className="w-20 h-20 bg-indigo-400 rounded-lg stagger-box" />
-          <div className="w-20 h-20 bg-indigo-500 rounded-lg stagger-box" />
-          <div className="w-20 h-20 bg-indigo-600 rounded-lg stagger-box" />
-          <div className="w-20 h-20 bg-indigo-700 rounded-lg stagger-box" />
-          <div className="w-20 h-20 bg-indigo-800 rounded-lg stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-200 stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-300 stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-400 stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-500 stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-600 stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-700 stagger-box" />
+          <div className="rounded-[50px] w-20 h-20 bg-indigo-800 stagger-box" />
         </div>
       </div>
     </main>
